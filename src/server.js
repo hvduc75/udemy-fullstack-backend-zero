@@ -8,18 +8,22 @@ const app = express(); // app express
 const port = process.env.PORT || 8888; // port
 const hostname = process.env.HOST_NAME;
 
+// config req.body
+app.use(express.json()) // for json
+app.use(express.urlencoded({ extended: true })) // for form data
+
 // config template engine
 configViewEngine(app);
 
 //khai báo route
 app.use('/', webRoutes);
 
-connection.query(
-  'SELECT * FROM Users u',
-  function (err, results, fields) {
-    console.log(results); // results contains rows returned by server
-  }
-)
+// connection.query(
+//   'SELECT * FROM Users u',
+//   function (err, results, fields) {
+//     console.log(results); // results contains rows returned by server
+//   }
+// )
 
 
 app.listen(port, hostname, () => {
